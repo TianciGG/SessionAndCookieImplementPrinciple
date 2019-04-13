@@ -23,16 +23,19 @@ import chauncy.xss.XssAndSqlHttpServletRequestWrapper;
 public class FilterDemo implements Filter{
 	
 	public FilterDemo(){
-		System.out.println("FilterDemo构造函数被执行。。。");
+		System.out.println("FilterDemo无参构造函数被执行。。。");
 	}
 	
 	/**
-	 * 初始化
+	 * 初始化，只执行一次
 	 */
 	public void init(FilterConfig filterConfig) throws ServletException {
 		System.out.println("init...");
 	}
 	
+	/**
+	 * 如果doFilter方法不放行的话，那么就不会执行。
+	 */
 	public void doFilter(ServletRequest paramRequest, ServletResponse paramResponse, FilterChain paramFilterChain	)
 			throws IOException, ServletException {
 		System.out.println("doFilter...");
@@ -55,7 +58,7 @@ public class FilterDemo implements Filter{
 	}
 	
 	/**
-	 * 销毁
+	 * 销毁，只执行一次
 	 */
 	public void destroy() {
 		System.out.println("destroy...");

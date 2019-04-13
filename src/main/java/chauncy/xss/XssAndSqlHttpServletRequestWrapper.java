@@ -19,14 +19,17 @@ public class XssAndSqlHttpServletRequestWrapper extends HttpServletRequestWrappe
 		super(request);
 		this.request=request;
 	}
-	
+	/**
+	 * 将request中的value值重写一下，将一些脚本参数、非法参数转换成html元素执行。
+	 */
 	@Override
 	public String getParameter(String name) {
 		String value = request.getParameter(name);
-		System.out.println("name:"+name+",value:"+value);
+		System.out.println("name:"+name+",转换前value:"+value);
 		if(!StringUtils.isEmpty(value)){
 			//转换html
 			value=StringEscapeUtils.escapeHtml4(value);
+			System.out.println("转换后value:");
 		}
 		return value;
 	}
